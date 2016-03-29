@@ -4,4 +4,3 @@ import {RegisterFormComponent} from './default/components/register-form/register
 angular.module('lblog.components')
 	.component('loginForm', LoginFormComponent)
 	.component('registerForm', RegisterFormComponent);
-

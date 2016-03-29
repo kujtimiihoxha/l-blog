@@ -3,6 +3,7 @@ require('./tasks/angular.task.js');
 require('./tasks/bower.task.js');
 require('./tasks/ngHtml2Js.task.js');
 require('./tasks/defaults.ngHtml2Js.task.js');
+require('./tasks/todo.task.js');
 require('laravel-elixir-livereload');
 require('laravel-elixir-karma');
 
@@ -49,5 +50,5 @@ elixir(function(mix) {
         })
         .karma({
             jsDir: karmaJsDir
-        });
+        })
 });

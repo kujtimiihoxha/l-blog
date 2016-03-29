@@ -2,9 +2,9 @@
 
 return [
       'source' => [
-            'root'            => 'angular',
-            'page'            => 'app/pages',
-            'components'      => 'app/components',
+            'root'            => 'lblog',
+            'page'            => 'admin/pages',
+            'components'      => 'admin/components',
             'config'          => 'config',
             'dialogs'         => 'dialogs',
             'filters'         => 'filters',
@@ -27,7 +27,7 @@ return [
             ],
             'source' => [
                 'root'            => 'tests/angular/',
-                'components'      => 'app/components',
+                'components'      => 'admin/components',
                 'services'        => 'services',
             ],
       ],
