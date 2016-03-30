@@ -612,21 +612,12 @@
 			_classCallCheck(this, SettingsService);
 
 			this.StateProvider = StateProvider;
-			//content negotiationcontroller:function (StateProvider) {
-			// StateProvider.addState('admin.test',{
-			// 	url: '/test',
-			// 	views: {
-			// 		'main@': {
-			// 			template:'<h1>Test</h1>'
-			// 		}
-			// 	}
-			// });
 		}
 
 		_createClass(SettingsService, [{
 			key: 'addAdminPage',
 			value: function addAdminPage(title, stateName, menuTitle, role, url, view, controller, order, icon) {
-				this.StateProvider.addState('admin.' + stateName, new _state.State(url, view, controller));
+				this.StateProvider.addState('admin.' + stateName, new _state.State(url, view, role, controller));
 			}
 		}, {
 			key: 'addAdminPageSubMenu',
@@ -651,11 +642,14 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var State = exports.State = function State(url, view, controller) {
+	var State = exports.State = function State(url, view, role, controller) {
 	    _classCallCheck(this, State);
 
 	    return {
 	        url: url,
+	        data: {
+	            role: role
+	        },
 	        views: {
 	            'main@': {
 	                template: view,
@@ -725,7 +719,7 @@
 	        value: function failed(response) {
 	            if (response.status === 422) {
 	                for (var error in response.data.errors) {
-	                    $log.error(error);
+	                    this.$log.error(error);
 	                }
 	            }
 	        }

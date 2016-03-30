@@ -366,9 +366,9 @@
 
 	'use strict';
 
-	var _API = __webpack_require__(16);
+	var _api = __webpack_require__(16);
 
-	angular.module('lblog.blog.services').service('API', _API.APIService);
+	angular.module('lblog.blog.services').service('Api', _api.APIService);
 
 /***/ },
 /* 16 */
@@ -382,7 +382,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var APIService = exports.APIService = ["Restangular", "ToastService", "$window", function APIService(Restangular, ToastService, $window) {
+	var APIService = exports.APIService = ["Restangular", "$window", "$log", function APIService(Restangular, $window, $log) {
 		'ngInject';
 		//content negotiation
 
@@ -397,13 +397,8 @@
 			RestangularConfigurer.setBaseUrl('/api/').setDefaultHeaders(headers).setErrorInterceptor(function (response) {
 				if (response.status === 422) {
 					for (var error in response.data.errors) {
-						return ToastService.error(response.data.errors[error][0]);
+						$log.error(error);
 					}
-				}
-			}).addFullRequestInterceptor(function (element, operation, what, url, headers) {
-				var token = $window.localStorage.satellizer_token;
-				if (token) {
-					headers.Authorization = 'Bearer ' + token;
 				}
 			});
 		});
