@@ -14,10 +14,8 @@
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', 'AngularController@serveApp');
-    Route::get('/lblog', function(){
-        return  redirect()->to('/#/lblog/dashboard');
 
-    });
+    Route::get('/lblog', 'AngularAdminController@serveApp');
 
     Route::get('/unsupported-browser', 'AngularController@unsupported');
 
@@ -31,5 +29,7 @@ $api->group(['middleware' => ['api']], function ($api) {
 
 //protected routes with JWT (must be logged in)
 $api->group(['middleware' => ['api', 'api.auth']], function ($api) {
-
+    $api->get('/test',function(){
+        return "HI";
+    });
 });

@@ -1,11 +1,11 @@
 <!doctype html>
-<html ng-app="lblog" ng-strict-di>
+<html ng-app="lblog.blog" ng-strict-di>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{!! elixir('css/vendor.css') !!}">
-    <link rel="stylesheet" href="{!! elixir('css/app.css') !!}">
+    <link rel="stylesheet" href="{!! elixir('blog/css/app.css') !!}">
     {{--Begin Theme CSS--}}
     @if (file_exists(public_path('themes/lblog-first/css/vendor.css')))
         <link rel="stylesheet" href="{!! asset('themes/lblog-first/css/vendor.css') !!}">
@@ -27,9 +27,6 @@
     <div ui-view="footer"></div>
 
     <script src="{!! elixir('js/vendor.js') !!}"></script>
-    <script src="{!! elixir('js/default.partials.js') !!}"></script>
-
-
     {{--Begin Theme JS--}}
     @if (file_exists(public_path('themes/lblog-first/js/vendor.js')))
         <script src="{!! asset('themes/lblog-first/js/vendor.js') !!}"></script>
@@ -41,9 +38,8 @@
         <script src="{!! asset('themes/lblog-first/js/app.js') !!}"></script>
     @endif
     {{--End Theme JS--}}
-    <script src="{!! elixir('js/partials.js') !!}"></script>
-    <script src="{!! elixir('js/lblog.js') !!}"></script>
-
+    <script src="{!! elixir('blog/js/partials.blog.js') !!}"></script>
+    <script src="{!! elixir('blog/js/app.js') !!}"></script>
     {{--livereload--}}
     @if ( env('APP_ENV') === 'local' )
     <script type="text/javascript">
