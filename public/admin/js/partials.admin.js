@@ -30,6 +30,26 @@ try {
   module = angular.module('lblog.admin.partials', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('./views/admin/components/navigation/navigation.component.html',
+    '<ul>\n' +
+    '    <li  ng-repeat="item in vm.menu.items">\n' +
+    '        <a ui-sref="{{item.state}}">{{item.title}}</a>\n' +
+    '        <ul ng-if="item.children">\n' +
+    '            <li ng-repeat="subMenu in item.children"> <a ui-sref="{{subMenu.state}}">{{subMenu.title}}</a> </li>\n' +
+    '        </ul>\n' +
+    '    </li>\n' +
+    '</ul>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('lblog.admin.partials');
+} catch (e) {
+  module = angular.module('lblog.admin.partials', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('./views/admin/components/register-form/register-form.component.html',
     '<form ng-submit="vm.register()">\n' +
     '	<div>\n' +
@@ -78,8 +98,8 @@ try {
   module = angular.module('lblog.admin.partials', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('./views/admin/pages/header/header.page.html',
-    '<header>Admin Header</header>');
+  $templateCache.put('./views/admin/pages/footer/footer.page.html',
+    '<footer>Admin Footer</footer>');
 }]);
 })();
 
@@ -90,8 +110,30 @@ try {
   module = angular.module('lblog.admin.partials', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('./views/admin/pages/footer/footer.page.html',
-    '<footer>Admin Footer</footer>');
+  $templateCache.put('./views/admin/pages/header/header.page.html',
+    '<header>Admin Header</header>\n' +
+    '<navigation></navigation>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('lblog.admin.partials');
+} catch (e) {
+  module = angular.module('lblog.admin.partials', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('./views/admin/pages/login/login.page.html',
+    '<md-content class="Page-container">\n' +
+    '    <div class="Login-formContainer" layout="column" layout-align="center center">\n' +
+    '\n' +
+    '        <h1 class="md-headline">Log in to your account</h1>\n' +
+    '\n' +
+    '        <login-form></login-form>\n' +
+    '\n' +
+    '    </div>\n' +
+    '</md-content>\n' +
+    '');
 }]);
 })();
 
@@ -112,27 +154,6 @@ module.run(['$templateCache', function($templateCache) {
     '\n' +
     '		</div>\n' +
     '	</div>\n' +
-    '</md-content>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('lblog.admin.partials');
-} catch (e) {
-  module = angular.module('lblog.admin.partials', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('./views/admin/pages/login/login.page.html',
-    '<md-content class="Page-container">\n' +
-    '    <div class="Login-formContainer" layout="column" layout-align="center center">\n' +
-    '\n' +
-    '        <h1 class="md-headline">Log in to your account</h1>\n' +
-    '\n' +
-    '        <login-form></login-form>\n' +
-    '\n' +
-    '    </div>\n' +
     '</md-content>\n' +
     '');
 }]);

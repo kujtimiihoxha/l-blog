@@ -37,6 +37,6 @@ elixir.extend('partialsAdmin', function(src, output, options) {
             .pipe(concat(paths.output.name))
             .pipe(gulpIf(elixir.config.production, uglify()))
             .pipe(gulp.dest(paths.output.baseDir));
-    })
+    }).watch(paths.src.path);
    
 });

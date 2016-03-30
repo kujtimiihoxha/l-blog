@@ -7,6 +7,9 @@ import './index.providers';
 //Run
 import './index.run';
 
+//Services
+import './index.services';
+
 //Config
 import './index.config';
 
@@ -16,5 +19,5 @@ import './index.filters';
 //Components
 import './index.components';
 
-//Services
-import './index.services';
+//Constants
+import './index.constants';

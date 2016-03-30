@@ -1,0 +1,8 @@
+<ul>
+    <li  ng-repeat="item in vm.menu.items">
+        <a ui-sref="{{item.state}}">{{item.title}}</a>
+        <ul ng-if="item.children">
+            <li ng-repeat="subMenu in item.children"> <a ui-sref="{{subMenu.state}}">{{subMenu.title}}</a> </li>
+        </ul>
+    </li>
+</ul>

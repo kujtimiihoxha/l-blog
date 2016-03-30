@@ -3,6 +3,7 @@ angular.module('lblog.admin', [
 	'lblog.admin.filters',
 	'lblog.admin.services',
 	'lblog.admin.components',
+	'lblog.admin.constants',
 	'lblog.admin.providers',
 	'lblog.admin.routes',
 	'lblog.admin.config',
@@ -14,6 +15,7 @@ angular.module('lblog.admin.routes', []);
 angular.module('lblog.admin.filters', []);
 angular.module('lblog.admin.services', []);
 angular.module('lblog.admin.config', []);
+angular.module('lblog.admin.constants', []);
 angular.module('lblog.admin.providers', []);
 angular.module('lblog.admin.components', [
 	'ui.router', 'restangular', 'ngStorage', 'satellizer'

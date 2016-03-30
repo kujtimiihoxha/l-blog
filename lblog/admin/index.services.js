@@ -1,8 +1,8 @@
 import {APIService} from './services/api.service';
-import {SettingsService} from './services/settings.service';
+import {SettingsAPIService} from './services/settings.api.service';
 import {AuthenticationService} from './services/authentication.service';
 
 angular.module('lblog.admin.services')
 	.service('Api', APIService)
-	.service('Settings', SettingsService)
+	.service('SettingsAPI', SettingsAPIService)
 	.service('Auth', AuthenticationService);

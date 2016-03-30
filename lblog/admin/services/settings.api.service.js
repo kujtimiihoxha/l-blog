@@ -1,5 +1,5 @@
 import {State} from '../models/state.model'
-export class SettingsService {
+export class SettingsAPIService {
 	// var StateProvider;
 	constructor(StateProvider) {
 		'ngInject';
