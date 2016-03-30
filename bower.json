@@ -14,9 +14,32 @@
     "angular": "~1.5",
     "angular-ui-router": "~0.2.15",
     "ngstorage": "~0.3.3",
-    "angular-material": "~1.1",
     "restangular": "~1.5.2",
-    "angular-loading-bar": "~0.8.0",
-    "satellizer": "^0.14.0"
+    "satellizer": "^0.14.0",
+    "AdminLTE": "admin-lte#^2.3.3"
+  },
+  "overrides": {
+    "AdminLTE": {
+      "dependencies": {
+        "font-awesome": "^4.5.0",
+        "Ionicons": "ionicons#^2.0.1"
+      },
+      "main": [
+        "bootstrap/css/bootstrap.min.css",
+        "dist/css/AdminLTE.css",
+        "dist/css/skins/skin-blue.css",
+        "plugins/jQuery/jQuery-2.2.0.min.js",
+        "bootstrap/js/bootstrap.min.js",
+        "plugins/slimScroll/jquery.slimscroll.min.js",
+        "plugins/fastclick/fastclick.js",
+        "dist/js/app.js",
+        "dist/js/demo.js"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.min.css"
+      ]
+    }
   }
 }

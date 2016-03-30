@@ -140,7 +140,6 @@
 	    'ngInject';
 
 	    var deregisterationCallback = $rootScope.$on("$stateChangeStart", function (event, toState) {
-
 	        if (toState.data && toState.data.auth) {
 	            /*Cancel going to the authenticated state and go back to landing*/
 	            if (!$auth.isAuthenticated()) {
@@ -148,9 +147,14 @@
 	                return $state.go('admin.login');
 	            }
 	        }
-	        if (toState.name === "admin.login" && $auth.isAuthenticated()) {
-	            event.preventDefault();
-	            return $state.go('admin.dashboard');
+	        if (toState.name === "admin.login") {
+	            if ($auth.isAuthenticated()) {
+	                event.preventDefault();
+	                return $state.go('admin.dashboard');
+	            }
+	            $rootScope.loginPage = true;
+	        } else {
+	            $rootScope.loginPage = false;
 	        }
 	    });
 	    $rootScope.$on('$destroy', deregisterationCallback);
@@ -389,26 +393,44 @@
 	            auth: true
 	        },
 	        views: {
-	            header: {
+	            layout: {
+	                templateUrl: getView('defaultLayout'),
+	                controller: function controller() {
+	                    if (angular.isDefined($.AdminLTE.layout)) {
+	                        $.AdminLTE.layout.fix();
+	                    }
+	                }
+	            },
+	            'header@admin': {
 	                templateUrl: getView('header')
 	            },
-	            footer: {
+	            'siteBar@admin': {
+	                templateUrl: getView('side-bar')
+	            },
+	            'footer@admin': {
 	                templateUrl: getView('footer')
 	            },
-	            main: {}
+	            'main@admin': {}
 	        }
 	    }).state('admin.dashboard', {
 	        url: '/',
 	        views: {
-	            'main@': {
+	            'main@admin': {
 	                templateUrl: getView('dashboard')
+	            }
+	        }
+	    }).state('admin.test', {
+	        url: '/test',
+	        views: {
+	            'main@admin': {
+	                template: '\n                    <div class="content-header">\n                        <h1>\n                            Test Sub Menu\n                        </h1>\n                    </div>\n                    <div class="content body">\n                        This is a sub menu page\n                    </div><!-- /.content -->\n\n                    '
 	            }
 	        }
 	    }).state('admin.logout', {
 	        url: '/logout',
 
 	        views: {
-	            'main@': {
+	            'main@admin': {
 	                templateUrl: getView('dashboard'),
 	                controller: ["Auth", function controller(Auth) {
 	                    'ngInject';
@@ -423,7 +445,10 @@
 	            auth: false
 	        }, //{auth: true} would require JWT auth for this route
 	        views: {
-	            'main@': {
+	            'layout@': {
+	                templateUrl: getView('loginLayout')
+	            },
+	            'main@admin': {
 	                templateUrl: getView('login')
 	            }
 	        }
@@ -431,7 +456,7 @@
 	        url: '/register',
 	        data: {}, //{auth: true} would require JWT auth for this route
 	        views: {
-	            'main@': {
+	            'main@admin': {
 	                templateUrl: getView('register')
 	            }
 	        }
@@ -633,9 +658,9 @@
 
 	var _registerForm = __webpack_require__(23);
 
-	var _navigation = __webpack_require__(24);
+	var _sideBar = __webpack_require__(24);
 
-	angular.module('lblog.admin.components').component('loginForm', _loginForm.LoginFormComponent).component('registerForm', _registerForm.RegisterFormComponent).component('navigation', _navigation.NavigationComponent);
+	angular.module('lblog.admin.components').component('loginForm', _loginForm.LoginFormComponent).component('registerForm', _registerForm.RegisterFormComponent).component('sideBar', _sideBar.SideBarComponent);
 
 /***/ },
 /* 22 */
@@ -740,26 +765,28 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var NavigationController = function NavigationController(Menu) {
-		'ngInject';
+	var SideBarController = function SideBarController(Menu) {
+	    'ngInject';
 
-		_classCallCheck(this, NavigationController);
+	    //
 
-		console.log(Menu);
-		this.menu = Menu;
+	    _classCallCheck(this, SideBarController);
+
+	    this.items = Menu.items;
+	    console.log(Menu);
 	};
-	NavigationController.$inject = ["Menu"];
+	SideBarController.$inject = ["Menu"];
 
-	var NavigationComponent = exports.NavigationComponent = {
-		templateUrl: './views/admin/components/navigation/navigation.component.html',
-		controller: NavigationController,
-		controllerAs: 'vm',
-		bindings: {}
+	var SideBarComponent = exports.SideBarComponent = {
+	    templateUrl: './views/admin/components/sideBar/sideBar.component.html',
+	    controller: SideBarController,
+	    controllerAs: 'vm',
+	    bindings: {}
 	};
 
 /***/ },
@@ -794,10 +821,11 @@
 	        _classCallCheck(this, Menu);
 
 	        this.items = [];
-	        var dashboard = new _menuItem.MenuItem('dashboard', null, 1, 'admin.dashboard');
+	        var dashboard = new _menuItem.MenuItem('Dashboard', null, 1, 'admin.dashboard');
+	        dashboard.addSubMenu('test', 5, 'admin.test');
 	        this.items.push(dashboard);
-	        this.items.push(new _menuItem.MenuItem('register', null, 2, 'admin.register'));
-	        this.items.push(new _menuItem.MenuItem('logout', null, 3, 'admin.logout'));
+	        this.items.push(new _menuItem.MenuItem('Register', null, 2, 'admin.register'));
+	        this.items.push(new _menuItem.MenuItem('Logout', null, 3, 'admin.logout'));
 	    }
 
 	    _createClass(Menu, [{
@@ -832,11 +860,13 @@
 	        this.order = order;
 	        this.children = subMenus || [];
 	        this.state = state;
+	        this.hasChildren = false;
 	    }
 
 	    _createClass(MenuItem, [{
 	        key: "addSubMenu",
 	        value: function addSubMenu(title, order, state) {
+	            this.hasChildren = true;
 	            this.children.push({
 	                title: title,
 	                order: order,

@@ -5,9 +5,11 @@ export class MenuItem {
             this.order = order;
             this.children = subMenus || [];
             this.state = state;
+            this.hasChildren=false;
     }
 
     addSubMenu(title, order, state) {
+        this.hasChildren = true;
         this.children.push({
             title: title,
             order: order,
