@@ -1,4 +1,4 @@
-import {APIService} from './services/API.service';
+import {APIService} from './services/api.service';
 
 angular.module('lblog.blog.services')
-	.service('API', APIService);
+	.service('Api', APIService);

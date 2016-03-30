@@ -17,6 +17,12 @@ export class APIService {
 							$log.error(error);
 						}
 					}
+				})
+				.addFullRequestInterceptor(function(element, operation, what, url, headers) {
+					var token = $window.localStorage.satellizer_token;
+					if (token) {
+						headers.Authorization = 'Bearer ' + token;
+					}
 				});
 		});
 	}

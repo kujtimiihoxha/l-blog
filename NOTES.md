@@ -1,7 +1,7 @@
--[ ] Must separate the css and js from admin page and from blog page.
-    -[ ] Must call another page for admin and another page for blog
-    - [ ]This must be handled from laravel side
-    -[ ] This also will present the need to change the files that are generated on build
+-[x] Must separate the css and js from admin page and from blog page.
+    -[x] Must call another page for admin and another page for blog
+    -[x]This must be handled from laravel side
+    -[x] This also will present the need to change the files that are generated on build
 -[ ] About settings for the theme
     -[] Add a service that will make it easy to add a page to the main setting, this service should be called in the index.config
 of the theme
