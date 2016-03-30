@@ -9,7 +9,7 @@ of the theme
 
 - [ ] Menu must be ordered by number.
     - [ ] You must leave some numbers from menu to menu to make it possible for themes and plugins to add
-- [ ]Implement a settings API
+- [ ] Implement a settings API
     - [ ] Must have the ability to add a options group option name and must have a callback function that will handle the
     added data ('check if data format is how you want it ')
 
