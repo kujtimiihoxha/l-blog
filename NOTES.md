@@ -2,7 +2,7 @@
     - [x] Must call another page for admin and another page for blog
     - [x] This must be handled from laravel side
     - [x] This also will present the need to change the files that are generated on build
-- [ ] About settings for the theme
+- [ ] Implement the setting api (Allow themes to register menu items and pages for theme properties)
     - [ ] Add a service that will make it easy to add a page to the main setting, this service should be called in the index.config
 of the theme
     - [ ] This service will only be available if the theme has an admin section where it puts the settings
